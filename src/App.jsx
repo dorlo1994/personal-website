@@ -20,7 +20,7 @@ function NavigationBar({ pages }) {
 function Homepage() {
 	return (
 	<>
-	      <h2>Dor Lotan's Home Page</h2>
+	      <h2 class=" text-3x1 font-bold underline">Dor Lotan's Home Page</h2>
 	      <div className="card">
 		<p>
 		  Here I'll have some cool shit to show people :)
