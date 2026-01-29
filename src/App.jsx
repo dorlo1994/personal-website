@@ -1,6 +1,5 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-const url = 'http://localhost:5173'
 
 
 function NavigationBar({ pages }) {
