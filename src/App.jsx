@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function NavigationBar({ pages }) {
 	return (
-		<nav>
+		<nav className="sidebar">
 		<ul>
 		{pages.map((page) => (
 			<li key={page.endpoint}>
@@ -19,12 +19,14 @@ function NavigationBar({ pages }) {
 function Homepage() {
 	return (
 	<>
-	      <h2 class=" text-3x1 font-bold underline">Dor Lotan's Home Page</h2>
-	      <div className="card">
-		<p>
-		  Here I'll have some cool shit to show people :)
-		</p>
-	      </div>
+    <div className="card">
+      <h2 class=" text-3xl font-bold underline">
+        Dor Lotan's Home Page
+      </h2>
+      <p>
+        Here I'll have some cool shit to show people :) it will come from obsidian!
+      </p>
+    </div>
 	</>
 	)
 }
@@ -56,17 +58,22 @@ const PAGES = [
 function App() {
   return (
     <Router>
+    <div className="app-layout">
       <NavigationBar pages={PAGES} />
-	<Routes>
-	  {PAGES.map((page) => (
-		  <Route
-		  	key={page.endpoint}
-		  	path={page.endpoint}
-		  	element={<page.component />}
-		  />
-	  ))}
-	</Routes>
-    </Router>
+        <main>
+          <Routes>
+            {PAGES.map((page) => (
+              <Route
+                key={page.endpoint}
+                path={page.endpoint}
+                element={<page.component />}
+              />
+            ))}
+        </Routes>
+      </main>
+    </div>
+  </Router>
+
   );
 }
 
