@@ -1,7 +1,7 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import glob from "glob";
+const fs = require("fs");
+const path = require("path");
+const matter = require("gray-matter");
+const glob = require("glob");
 
 const CONTENT_PATH = "content/vault";
 const OUTPUT_PATH = "content/generated";
