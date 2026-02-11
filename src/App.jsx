@@ -1,6 +1,9 @@
 import './App.css'
 import posts from "../content/generated/content.json";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt();
 
 
 function NavigationBar({ pages }) {
@@ -43,21 +46,29 @@ function BlogPost() {
 
   if (!post) return <p>Post not found</p>;
 
+
   return (
-    <article>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
+    <article className="prose prose-invert mx-auto p-6">
+      <div dangerouslySetInnerHTML={{ __html: `<h1>${post.title}</h1>` + md.render(post.content)}}/>
     </article>
   );
 }
 
 function Blog() {
-  return posts.map(post => (
-    <Link key={post.slug} to={`/${post.slug}`}>
-      {post.title}
-    </Link>
-  ));
+  return (
+    <div>
+      <h1>Blog Posts</h1>
+      <ul>
+        {posts.filter(post => post.type == "blog").map(post => (
+          <li key={post.slug}>
+            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
+
 
 function About() {
     return <h2>About me.</h2>;
