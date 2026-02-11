@@ -1,5 +1,6 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import posts from "../content/generated/content.json";
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 
 
 function NavigationBar({ pages }) {
@@ -35,8 +36,27 @@ function Projects() {
     return <h2>Here are my projects.</h2>;
 }
 
+function BlogPost() {
+  const { slug } = useParams();
+  // Find the post with this slug
+  const post = posts.find(p => p.slug === slug);
+
+  if (!post) return <p>Post not found</p>;
+
+  return (
+    <article>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+    </article>
+  );
+}
+
 function Blog() {
-    return <h2>My blog posts.</h2>;
+  return posts.map(post => (
+    <Link key={post.slug} to={`/${post.slug}`}>
+      {post.title}
+    </Link>
+  ));
 }
 
 function About() {
@@ -69,6 +89,7 @@ function App() {
                 element={<page.component />}
               />
             ))}
+          <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </main>
     </div>

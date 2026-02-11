@@ -3,7 +3,7 @@ const path = require("path");
 const matter = require("gray-matter");
 const glob = require("glob");
 
-const CONTENT_PATH = "content/vault";
+const CONTENT_PATH = "content/";
 const OUTPUT_PATH = "content/generated";
 
 fs.mkdirSync(OUTPUT_PATH, { recursive: true });
@@ -15,8 +15,10 @@ const posts = files.map((file) => {
   const { data, content } = matter(raw);
 
   return {
-    slug: file
+    slug: file.toLowerCase()
       .replace(CONTENT_PATH, "")
+      .replace("blog/", "")
+      .replace(/\s+/g, "-")
       .replace(".md", ""),
     ...data,
     content,
