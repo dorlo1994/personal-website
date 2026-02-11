@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build:content": "node scripts/buildContent.js",
+    "build": "npm run build:content && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -13,6 +14,9 @@
     "@marp-team/marp-core": "^4.2.0",
     "@marp-team/marp-react": "^0.0.4",
     "@tailwindcss/vite": "^4.1.18",
+    "glob": "^13.0.2",
+    "grey-matter": "^0.0.0",
+    "markdown-it": "^14.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.13.0",
