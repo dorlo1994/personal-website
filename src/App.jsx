@@ -1,5 +1,9 @@
 import './App.css'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import posts from "../content/generated/content.json";
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
+import MarkdownIt from "markdown-it";
+
+const md = new MarkdownIt();
 
 
 function NavigationBar({ pages }) {
@@ -35,9 +39,36 @@ function Projects() {
     return <h2>Here are my projects.</h2>;
 }
 
-function Blog() {
-    return <h2>My blog posts.</h2>;
+function BlogPost() {
+  const { slug } = useParams();
+  // Find the post with this slug
+  const post = posts.find(p => p.slug === slug);
+
+  if (!post) return <p>Post not found</p>;
+
+
+  return (
+    <article className="prose prose-invert mx-auto p-6">
+      <div dangerouslySetInnerHTML={{ __html: `<h1>${post.title}</h1>` + md.render(post.content)}}/>
+    </article>
+  );
 }
+
+function Blog() {
+  return (
+    <div>
+      <h1>Blog Posts</h1>
+      <ul>
+        {posts.filter(post => post.type == "blog").map(post => (
+          <li key={post.slug}>
+            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 
 function About() {
     return <h2>About me.</h2>;
@@ -69,6 +100,7 @@ function App() {
                 element={<page.component />}
               />
             ))}
+          <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </main>
     </div>
