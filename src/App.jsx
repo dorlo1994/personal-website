@@ -85,14 +85,24 @@ function BlogPost() {
   );
 }
 
+
 function Blog() {
+  const blogPosts = posts
+    .filter(post => post.type === "blog")
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
   return (
-    <div>
-      <h1>Blog Posts</h1>
+    <div className="prose prose-invert mx-auto p-6">
+      <h1>Blog</h1>
       <ul>
-        {posts.filter(post => post.type == "blog").map(post => (
+        {blogPosts.map(post => (
           <li key={post.slug}>
-            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+            <Link to={`/blog/${post.slug}`}>
+              {post.title}
+            </Link>
+            <div className="text-sm text-gray-500">
+              {post.date.split("T")[0]}
+            </div>
           </li>
         ))}
       </ul>
