@@ -1,6 +1,5 @@
 import posts from "../../content/generated/projects.json";
 import { Link } from 'react-router-dom';
-import ChiptunePlayerEmbed from "../components/ChiptunePlayerEmbed";
 
 function Projects() {
   const projectPosts = posts;
