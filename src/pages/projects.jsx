@@ -1,21 +1,25 @@
-import posts from "../../content/generated/blog.json";
+import posts from "../../content/generated/projects.json";
 import { Link } from 'react-router-dom';
 import ChiptunePlayerEmbed from "../components/ChiptunePlayerEmbed";
 
-function Project() {
+function Projects() {
+  const projectPosts = posts;
+
   return(
-  <div/>
+    <div className="prose prose-invert mx-auto p-6">
+      <h1>Projects</h1>
+      <ul>
+         {projectPosts.map(post => (
+          <li key={post.slug}>
+            <Link to={`/projects/${post.slug}`}>
+              {post.title}
+            </Link>
+           </li>
+         ))}
+      </ul>
+    </div>
   );
 }
 
-function PrevProjects() {
-  return (
-    <div className="prose prose-invert p-6">
-      <h1 className="text-2xl font-bold underline">Projects</h1>
-    <p>Interact with my chiptune player project!</p>
-    <ChiptunePlayerEmbed />
-    </div>
-    );
-}
 
 export default Projects

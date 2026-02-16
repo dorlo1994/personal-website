@@ -1,6 +1,7 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import BlogPost from "./components/BlogPost";
+import ProjectPost from "./components/ProjectPost";
 import NavigationBar from "./components/NavigationBar";
 import Homepage from "./pages/homepage";
 import Projects from "./pages/projects";
@@ -31,6 +32,7 @@ function App() {
                   element={<page.component />}
                 />
               ))}
+          <Route path="/projects/:slug" element={<ProjectPost />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </main>

@@ -53,7 +53,7 @@ publishedBlogPosts.sort(
 // 2️⃣ Projects
 //
 const projects = parseMarkdownFiles(
-  `${CONTENT_PATH}/Project/**/*.md`,
+  `${CONTENT_PATH}/Projects/**/*.md`,
   "project"
 );
 
