@@ -1,121 +1,13 @@
 import './App.css'
-import posts from "../content/generated/content.json";
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
-import MarkdownIt from "markdown-it";
-
-const md = new MarkdownIt();
-
-
-function UnderConstruction() {
-  return (
-  <>
-    <h2 className="text-2xl text-red-600 dark:text-red-400 font-bold">Page Under Construction!</h2>
-    <p> Come back here later and I might just have something for you</p>
-   </>
-   );
-
-}
-
-
-function NavigationBar({ pages }) {
-	return (
-		<nav className="sidebar">
-		<ul>
-		{pages.map((page) => (
-			<li key={page.endpoint}>
-			<Link to={page.endpoint}>{page.name}</Link>
-			</li>
-		))}
-		</ul>
-		</nav>
-	);
-}
-
-function Homepage() {
-	return (
-	<>
-    <div className="card">
-      <h2 className=" text-3xl font-bold underline">
-        Dor Lotan's Home Page
-      </h2>
-      <p>
-        Showcasing my personal software development projects and my DevOps PKM Blog.
-      </p>
-    </div>
-	</>
-	)
-}
-
-function Projects() {
-    return UnderConstruction();
-}
-
-function BlogPost() {
-  const { slug } = useParams();
-  // Find the post with this slug
-  const post = posts.find(p => p.slug === slug);
-
-  if (!post) return <p>Post not found</p>;
-
-
-  return (
-    <article className="prose prose-invert mx-auto p-6">
-      <div dangerouslySetInnerHTML={{ __html: `<h1>${post.title}</h1><div>${post.date.split('T')[0]}</div>` + md.render(post.content)}}/>
-    </article>
-  );
-}
-
-function Blog() {
-  return (
-    <div>
-      <h1>Blog Posts</h1>
-      <ul>
-        {posts.filter(post => post.type == "blog").map(post => (
-          <li key={post.slug}>
-            <Link to={`/blog/${post.slug}`}>{post.title}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-
-function About() {
-    return (
-      <article className="prose prose-invert">
-        <h2 className="text-2xl font-bold underline">About me</h2>
-        <p>As someone who is deeply invested in the concept of digital agency, I am passionate about empowering individuals to take control of their own data and habits. With a strong background in personal data analysis, I have developed systems that enable me to collect and review my daily activities, projects, and progress in an automated manner. This allows me to gain valuable insights into how my habits and activities affect my productivity, ultimately leading to improved efficiency and effectiveness.</p>
-
-<p>As a proponent of digital agency, I believe it is essential for individuals to be able to participate in the conversation around data collection and usage. Unfortunately, many people are digitally illiterate, which puts them at a significant disadvantage in today's world. By sharing my experiences and thoughts on this topic, I hope to help bridge this gap and promote a more informed and empowered community.</p>
-
-<p>In my quest for digital agency, I have come to realize the importance of automation as an empowering tool. By leveraging technology to automate repetitive tasks and processes, I am able to free up time and mental energy to focus on higher-level thinking and strategy.</p>
-
-<p>As a thought leader in this space, I am committed to exploring the intersection of digital agency and algorithmic influence. I believe that it is essential for individuals to have control over their own data and habits, rather than relying on algorithms to make decisions for them.</p>
-      </article>);
-}
-
-function Contact() {
-    return (
-      <article className="prose prose-invert">
-      <h2 className="text-2xl font-bold underline">Contact me</h2>
-      <ul>
-        <li key="email">
-          <a href="mailto:dor.lotan94@gmail.com">Email</a>
-        </li>
-        <li key="phone">
-          <a href="tel:+972526415218">Mobile Phone</a>
-        </li>
-        <li key="github">
-          <a href="https://www.github.com/dorlo1994">GitHub</a>
-        </li>
-        <li key="linkedin">
-          <a href="https://www.linkedin.com/in/dor-lotan">LinkedIn</a>
-        </li>
-      </ul>
-      </article>
-    );
-}
+import BlogPost from "./components/BlogPost";
+import NavigationBar from "./components/NavigationBar";
+import Homepage from "./pages/homepage";
+import Projects from "./pages/projects";
+import Blog from "./pages/blogs";
+import About from "./pages/aboutme";
+import Contact from "./pages/contact";
+import UnderConstruction from "./pages/UnderConstruction";
 
 const PAGES = [
 	{name: "Home", endpoint: "/", component: Homepage},
@@ -128,17 +20,17 @@ const PAGES = [
 function App() {
   return (
     <Router>
-    <div className="app-layout">
-      <NavigationBar pages={PAGES} />
-        <main>
-          <Routes>
-            {PAGES.map((page) => (
-              <Route
-                key={page.endpoint}
-                path={page.endpoint}
-                element={<page.component />}
-              />
-            ))}
+      <div className="app-layout">
+        <NavigationBar pages={PAGES} />
+          <main>
+            <Routes>
+              {PAGES.map((page) => (
+                <Route
+                  key={page.endpoint}
+                  path={page.endpoint}
+                  element={<page.component />}
+                />
+              ))}
           <Route path="/blog/:slug" element={<BlogPost />} />
         </Routes>
       </main>
