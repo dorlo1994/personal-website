@@ -1,9 +1,8 @@
-import posts from "../../content/generated/content.json";
+import posts from "../../content/generated/blog.json";
 import { Link } from 'react-router-dom';
 
 function Blog() {
   const blogPosts = posts
-    .filter(post => post.type === "blog")
     .sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
