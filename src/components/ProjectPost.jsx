@@ -15,7 +15,7 @@ function ProjectPost() {
 
   return (
     <article className="prose prose-invert mx-auto p-6">
-      <div dangerouslySetInnerHTML={{ __html: `<h1>${post.title}</h1>` + md.render(post.content)}}/>
+      <div dangerouslySetInnerHTML={{ __html: `<h1>${post.title}</h1><a href="${post.repo}">Repository</a>` + md.render(post.content)}}/>
     {post.slug === "chiptune-player" && (
         <div className="mt-10">
           <ChiptunePlayerEmbed />
