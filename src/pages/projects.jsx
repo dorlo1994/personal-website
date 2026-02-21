@@ -1,13 +1,24 @@
-import ChiptunePlayerEmbed from "../components/ChiptunePlayerEmbed";
+import posts from "../../content/generated/projects.json";
+import { Link } from 'react-router-dom';
 
 function Projects() {
-  return (
-    <div className="prose prose-invert p-6">
-      <h1 className="text-2xl font-bold underline">Projects</h1>
-    <p>Interact with my chiptune player project!</p>
-    <ChiptunePlayerEmbed />
+  const projectPosts = posts;
+
+  return(
+    <div className="prose prose-invert mx-auto p-6">
+      <h1>Projects</h1>
+      <ul>
+         {projectPosts.map(post => (
+          <li key={post.slug}>
+            <Link to={`/projects/${post.slug}`}>
+              {post.title}
+            </Link>
+           </li>
+         ))}
+      </ul>
     </div>
-    );
+  );
 }
+
 
 export default Projects

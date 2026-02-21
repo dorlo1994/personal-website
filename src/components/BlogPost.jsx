@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import posts from "../../content/generated/content.json";
+import posts from "../../content/generated/blog.json";
 import MarkdownIt from "markdown-it";
 
 const md = new MarkdownIt();

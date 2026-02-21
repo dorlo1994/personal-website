@@ -25,14 +25,14 @@ export default function ChiptunePlayerEmbed() {
     setAudioUrl(null);
 
     try {
-      const response = await fetch("http://localhost:8000/render", {
+      const response = await fetch("https://chiptune.dorlotan.cc/render", {
         method: "POST",
         headers: { "Content-Type": "text/plain" },
         body: noteText,
       });
 
       if (!response.ok) {
-        alert("Error rendering audio!");
+        alert(`Error rendering audio!`);
         setLoading(false);
         return;
       }
