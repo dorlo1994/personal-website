@@ -1,0 +1,3 @@
+[submodule "content"]
+	path = content
+	url = git@github.com:dorlo1994/vault-publish.git
