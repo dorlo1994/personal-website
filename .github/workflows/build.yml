@@ -5,7 +5,7 @@ on: [push]
 
 jobs:
   build-pipeline:
-    if: github.ref != 'refs/heads/gh-pages'
+    if: github.ref_name != 'gh-pages'
     runs-on: ubuntu-latest
 
     steps:
