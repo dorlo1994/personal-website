@@ -1,5 +1,4 @@
-import './App.css'
-import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
 import BlogPost from "./components/BlogPost";
 import ProjectPost from "./components/ProjectPost";
 import NavigationBar from "./components/NavigationBar";
@@ -9,6 +8,7 @@ import Blog from "./pages/blogs";
 import About from "./pages/aboutme";
 import Contact from "./pages/contact";
 import UnderConstruction from "./pages/UnderConstruction";
+import './App.css'
 
 const PAGES = [
 	{name: "Home", endpoint: "/", component: Homepage},
