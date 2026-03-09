@@ -1,25 +1,26 @@
 name: build-website
 run-name: ${{ github.actor }} is building website.
-on: [push]
-branches-ignore: gh-pages
-jobs:
-  build-pipeline:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          submodules: recursive
-      - name: Debug repo
-        run: |
-          ls -la
-          git status
-          git log -n 5
+on:
+  push:
+  branches-ignore: gh-pages
+  jobs:
+    build-pipeline:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v5
+          with:
+            submodules: recursive
+        - name: Debug repo
+          run: |
+            ls -la
+            git status
+            git log -n 5
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - run: npm install
-      - run: npm ci
-      - run: npm run build
-      - run: test -d dist
+        - uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+        - run: npm install
+        - run: npm ci
+        - run: npm run build
+        - run: test -d dist
 
