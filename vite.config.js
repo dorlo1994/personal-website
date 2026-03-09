@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/personal-website/'
+  base: '/personal-website/',
   plugins: [react(), tailwindcss()],
   esbuild: {
     loader: 'jsx', // ensure jsx files are correctly parsed
