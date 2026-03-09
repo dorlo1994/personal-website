@@ -1,11 +1,7 @@
 name: build-website
 run-name: ${{ github.actor }} is building website.
 
-on:
-  push:
-    branches-ignore:
-      - gh-pages
-
+on: [push]
 
 jobs:
   build-pipeline:
